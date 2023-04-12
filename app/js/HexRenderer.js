@@ -24,7 +24,7 @@ const HexRenderer = class HexRenderer{
     }
 
     // draw string
-    drawString(string, x, y, color = '#ffffff', font = '20px Arial'){
+    drawString(string, x, y, color = '#ffffff', font = '20px Monospace'){
         this.ctx.fillStyle = color;
         this.ctx.font = font;
         // correct for font height
