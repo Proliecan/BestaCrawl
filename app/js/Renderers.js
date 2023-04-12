@@ -46,6 +46,12 @@ const BaseRenderer = class BaseRenderer {
         this.ctx.fillText(string, x, y);
     }
 
+    drawRectBorder(x, y, width, height, color = '#ffffff', lineWidth = 1) {
+        this.ctx.strokeStyle = color;
+        this.ctx.lineWidth = lineWidth;
+        this.ctx.strokeRect(x, y, width, height);
+    }
+
     //draw frame rate
     drawFps(fps) {
         this.drawString(fps, 10, 10);
@@ -97,13 +103,13 @@ const HexRenderer = class HexRenderer extends BaseRenderer {
 
 
     // draw hex grid
-    drawHexGrid(x = 0, y = 0, width = 10, height = 10, hexHeight = 50, color = '#ffffff', lineWidth = 1) {
+    drawHexGrid(x = 0, y = 0, width = 10, height = 10, t = 50, color = '#ffffff', lineWidth = 1) {
         // set settings
         this.ctx.strokeStyle = color;
         this.ctx.lineWidth = lineWidth;
 
         // calculate hex params
-        let R = hexHeight / 2;
+        let R = t;
         let r = 0.86602540378443864676372317075294 * R; // r = R * cos(30)
 
         // // draw a single hex at x, y
@@ -113,13 +119,15 @@ const HexRenderer = class HexRenderer extends BaseRenderer {
 
        // calculate hex grid params
         let hexWidth = 2 * r; 
+        let hexHeight = 2 * R;
+        let lineHeight = R + R/2;
 
         // draw full tiling hex grid
         for (let i = 0; i < width; i++) {
             for (let j = 0; j < height; j++) {
                 // calculate hex position
-                let hexX = x + (i * hexWidth);
-                let hexY = y + (j * (hexHeight-R/2)); //???
+                let hexX = x + (i * hexWidth) + r;
+                let hexY = y + (j * lineHeight) + R;
                 // offset every other row
                 if (j % 2 == 1) {
                     hexX += hexWidth / 2;
@@ -135,6 +143,38 @@ const HexRenderer = class HexRenderer extends BaseRenderer {
         }
     }
 
+    // fill rect with hex pattern of given hex size and center it in the rect
+    fillRectWithHexPattern(x, y, width, height, hexSize, color = '#ffffff', lineWidth = 1) {
+        // calculate hex params
+        let R = hexSize;
+        let r = 0.86602540378443864676372317075294 * R; // r = R * cos(30)
+
+        // calculate hex grid params
+        let hexWidth = 2 * r;
+        let hexHeight = R + R/2;
+
+        // calculate number of hexes to fill rect
+        let hexesX = Math.floor(width / hexWidth);
+        let hexesY = Math.floor(height / hexHeight);
+
+        // calculate left over space
+        let leftOverX = width - (hexesX * hexWidth);
+        let leftOverY = height - (hexesY * hexHeight);
+
+        // calculate offset to center hex grid
+        let offsetX = leftOverX / 2;
+        let offsetY = (leftOverY-R/2) / 2;  // accommodate for the line height that is lower than hex height
+        
+
+        // draw hex grid
+        this.drawHexGrid(x + offsetX, y + offsetY, hexesX, hexesY, hexSize, color, lineWidth);
+    }
+
+    // fill canvas with hex pattern of given hex size
+    fillCanvasWithHexPattern(hexSize, color = '#ffffff', lineWidth = 1) {
+        this.fillRectWithHexPattern(0, 0, this.canvas.width, this.canvas.height, hexSize, color, lineWidth);
+    }
+
 
     // update should be overwriten by child classes
     update() {
@@ -143,7 +183,7 @@ const HexRenderer = class HexRenderer extends BaseRenderer {
         //draw frame rate
         this.drawFps(Cycle.getInstance().fps);
 
-        // draw hex grid
-        this.drawHexGrid(100, 100, 10, 10, 100 );
+        // fill canvas with hex pattern
+        this.fillCanvasWithHexPattern(50, '#ffffff', 1);
     }
 }
