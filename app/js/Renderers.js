@@ -1,22 +1,20 @@
-const HexRenderer = class HexRenderer{
-    hexes = [];
-    constructor(canvas){
+const BaseRenderer = class BaseRenderer {
+    constructor(canvas) {
         this.canvas = canvas.canvasObject;
         this.ctx = canvas.ctx;
     }
 
     // fill with solid color
-    fill(color){
+    fill(color) {
         this.ctx.fillStyle = color;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        // console.log('canvas filled with color:', color);
     }
 
     // draw xy coordinates
-    drawCoordinates(){
+    drawCoordinates() {
         this.ctx.fillStyle = '#ffffff';
-        for(let x = 0; x < this.canvas.width; x += 100){
-            for(let y = 0; y < this.canvas.height; y += 100){
+        for (let x = 0; x < this.canvas.width; x += 100) {
+            for (let y = 0; y < this.canvas.height; y += 100) {
                 this.ctx.fillText(`(${x}, ${y})`, x, y);
             }
         }
@@ -24,7 +22,7 @@ const HexRenderer = class HexRenderer{
     }
 
     // draw string
-    drawString(string, x, y, color = '#ffffff', font = '20px Monospace'){
+    drawString(string, x, y, color = '#ffffff', font = '20px Monospace') {
         this.ctx.fillStyle = color;
         this.ctx.font = font;
         // correct for font height
@@ -32,4 +30,14 @@ const HexRenderer = class HexRenderer{
         this.ctx.fillText(string, x, y);
     }
 
+    // update should be overwriten by child classes
+    update() {
+        console.log('BaseRenderer.update() called. This should be overwritten by child classes.');
+    }
+}
+
+const HexRenderer = class HexRenderer extends BaseRenderer {
+    constructor(canvas) {
+        super(canvas);
+    }
 }
