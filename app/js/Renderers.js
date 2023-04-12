@@ -21,7 +21,6 @@ const BaseRenderer = class BaseRenderer {
                 this.ctx.fillText(`(${x}, ${y})`, x, y);
             }
         }
-        // console.log('canvas coordinates drawn');
     }
 
     // draw string
@@ -40,7 +39,6 @@ const BaseRenderer = class BaseRenderer {
 
     // update should be overwriten by child classes
     update() {
-        // console.log('BaseRenderer.update() called. This should be overwritten by child classes.');
         // black background
         this.fill('#000000');
         //draw frame rate

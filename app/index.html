@@ -12,14 +12,14 @@
     <canvas id="canvas" width="100" height="100"></canvas>
 
     <!-- Load scripts -->
-    <script src="js/util.js"></script>
-    <script src="js/canvas.js"></script>
+    <script src="js/Singleton.js"></script>
+    <script src="js/Canvas.js"></script>
     <script src="js/Renderers.js"></script>
-    <script src="js/cycle.js"></script>
+    <script src="js/Cycle.js"></script>
 
     <!-- Start cycle -->
     <script>
-        Cycle.getInstance().start(30);
+        Cycle.getInstance().start(fps=30);
         new HexRenderer(Canvas.getInstance());
     </script>
 </body>

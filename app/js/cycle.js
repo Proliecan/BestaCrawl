@@ -1,6 +1,3 @@
-// debug
-// console.log('cycle.js');
-
 const Cycle = class Cycle extends Singleton {
     constructor() {
         super();

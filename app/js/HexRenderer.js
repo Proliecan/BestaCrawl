@@ -9,7 +9,6 @@ const HexRenderer = class HexRenderer{
     fill(color){
         this.ctx.fillStyle = color;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        // console.log('canvas filled with color:', color);
     }
 
     // draw xy coordinates
@@ -20,7 +19,6 @@ const HexRenderer = class HexRenderer{
                 this.ctx.fillText(`(${x}, ${y})`, x, y);
             }
         }
-        // console.log('canvas coordinates drawn');
     }
 
     // draw string
