@@ -55,7 +55,7 @@ const BaseRenderer = class BaseRenderer {
     }
 }
 
-const HexRenderer = class HexRenderer extends BaseRenderer {
+const AdvancedRenderer = class AdvancedRenderer extends BaseRenderer {
     constructor(canvas) {
         super(canvas);
     }
