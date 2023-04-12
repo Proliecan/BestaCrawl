@@ -6,17 +6,22 @@ const Cycle = class Cycle extends Singleton {
         super();
         // get canvas Singleton instance
         this.canvas = Canvas.getInstance();
+        
+        // render callbacks
+        this.renderCallbacks = [];
+    }
 
-        // TEMPORARY: create a new HexRenderer to display fps
-        this.hexRenderer = new HexRenderer(this.canvas);
-        this.fps =-1;
+    // register render callback
+    registerRenderCallback = (callback) => {
+        this.renderCallbacks.push(callback);
     }
 
     // update function
-    update = (fps) => {
-        // TEMOPRARY: hexRenderer
-        this.hexRenderer.fill('#000000');
-        this.hexRenderer.drawString(fps, 10, 10);
+    update = () => {
+        // render callbacks
+        this.renderCallbacks.forEach(callback => {
+            callback();
+        });
     }
 
     // Update cycle

@@ -14,7 +14,7 @@ const Canvas = class Canvas extends Singleton {
         //  */
         // // HERE: HANDLED BY AN ANIMATION CYCLE IN CYCLE.JS
         // this.renderFrame();
-        console.log('canvas resized');
+        // console.log('canvas resized');
     }
 
     constructor() {
