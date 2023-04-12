@@ -1,0 +1,29 @@
+/* Debug */
+    /* Canvas with red border */
+    /* #canvas {
+        border: 1px solid red;
+    } */
+
+/* Body perquisites */
+body {
+    /* no margin */
+    margin: 0;
+    /* no padding */
+    padding: 0;
+    /* no scrollbars */
+    overflow: hidden;
+}
+
+/* Canvas Style */
+    #canvas {
+        /* cover whole page without overflowing */
+        left: 0;
+        top: 0;
+
+        /* no margin */
+        margin: 0;
+        /* no padding */
+        padding: 0;
+        /* no scrollbars */
+        /* overflow: hidden; */
+    }
