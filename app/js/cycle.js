@@ -11,7 +11,7 @@ const update = (fps) => {
     // update canvas
     hexRenderer.fill('#000000');
     hexRenderer.drawString(fps, 10, 10);
-    console.log('canvas updated');
+    // console.log('canvas updated');
 }
 
 // Update cycle
