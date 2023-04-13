@@ -54,6 +54,19 @@ const BaseRenderer = class BaseRenderer {
 
     //draw frame rate
     drawFps(fps) {
+        // trim fps to 2 decimal places
+        fps = fps.toFixed(2);
+
+        // fill before decimal with 0 to 3 digits
+        for (let i = 1; i < 3; i++) { // don't fill 0.00
+            let decimalFactor = Math.pow(10, i);
+            if (fps < decimalFactor) {
+                fps = '0' + fps;
+            }
+        }
+
+
+        // draw fps
         this.drawString(fps, 10, 10);
     }
 

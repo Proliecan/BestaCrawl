@@ -26,9 +26,6 @@ const Cycle = class Cycle extends Singleton {
         let minFrameTime = 1000 / maxFps;
         let lastFrameEnd = performance.now();
         while (true) {
-            //trim fps to 2 decimal places with always 3 digits before decimal
-            this.fps = Math.round(this.fps * 100) / 100;
-            this.fps = this.fps.toString().padStart(6, '0');
             //update();
             this.update(this.fps);
 
